@@ -15,3 +15,6 @@ This basic app has many of the features you'd expect to find in a data-driven ap
 7. Format data with pipes.
 8. Create a shared service to assemble the heroes.
 9. Use routing to navigate among different views and their components.
+
+## The following diagram captures all of the navigation options.
+![alt tag](https://github.com/ogm710811/Tutorial-Tour-of-Heroes/blob/master/src/assets/img/nav-diagram.png "diagram of the navigation options") 
