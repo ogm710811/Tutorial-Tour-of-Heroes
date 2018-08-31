@@ -4,7 +4,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
 import { Hero } from '../models/hero';
-import { HEROES } from '../models/mock-heroes';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -61,6 +60,18 @@ export class HeroService {
     return this.http.delete<Hero>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
+    );
+  }
+
+  /* GET heroes whose name contains search term */
+  searchHeroes(term: string): Observable<Hero[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+      tap(_ => this.log(`found heroes matching "${term}"`)),
+      catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }
 
